@@ -9,6 +9,7 @@ module.exports = app => {
             });
 
     login = (req, res) => {
+        console.log('in login');
         const user = req.body;
         userModel.findUserByCredentials(user.username, user.password)
             .then(user => {
@@ -30,6 +31,7 @@ module.exports = app => {
     register = (req, res) => {
         var username = req.body.username;
         var password = req.body.password;
+        console.log("hello from node");
         var newUser = {
             username: username, password: password
         };
