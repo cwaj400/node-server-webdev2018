@@ -4,9 +4,10 @@ var express = require('express');
 var app = express();
 var session = require('express-session');
 var bodyParser = require('body-parser');
+const MONGO_DB_URL = 'mongodb://cwaj400:rootuser1@ds223609.mlab.com:23609/webdevsummer2assfour';
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/webdev-summer2-2018');
+mongoose.connect('mongodb://cwaj400:rootuser1@ds223609.mlab.com:23609/webdevsummer2assfour');
 
 
 app.use(function (req, res, next) {
@@ -33,6 +34,6 @@ userService(app);
 
 require('./services/section.service.server')(app);
 
-app.listen(process.env.PORT || 3000, () =>
+app.listen(process.env.MONGO_DB_URL || 3000, () =>
     console.log('Node server started!'));
 
