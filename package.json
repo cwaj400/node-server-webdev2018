@@ -12,6 +12,12 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
-    "mongoose": "^5.2.6"
+    "jsonwebtoken": "^8.3.0",
+    "mongoose": "^5.2.6",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "enhanced-resolve": "^3.3.0"
   }
 }

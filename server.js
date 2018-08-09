@@ -1,7 +1,10 @@
+
+
 var express = require('express');
 var app = express();
 var session = require('express-session');
 var bodyParser = require('body-parser');
+
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/webdev-summer2-2018');
 
@@ -14,6 +17,7 @@ app.use(function (req, res, next) {
     next();
 });
 
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
@@ -23,11 +27,12 @@ app.use(session({
     secret: 'any string'
 }));
 
+
 const userService = require('./services/user.service.server'); //(app);
 userService(app);
 
 require('./services/section.service.server')(app);
 
-app.listen(3000, () =>
+app.listen(process.env.PORT || 3000, () =>
     console.log('Node server started!'));
 

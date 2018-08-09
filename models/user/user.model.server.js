@@ -9,6 +9,9 @@ findAllUsers = () =>
 findUserByCredentials = (username, password) =>
     userModel.findOne({username: username, password: password});
 
+findUserByUsername = (username) =>
+    userModel.findOne({username: username});
+
 findUserById = userId =>
     userModel.findById(userId);
 
@@ -37,5 +40,6 @@ module.exports = {
     findUserByCredentials,
     createUser,
     deleteUser,
-    updateUser
+    updateUser,
+    findUserByUsername
 };

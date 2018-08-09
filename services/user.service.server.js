@@ -1,5 +1,4 @@
 module.exports = app => {
-
     const userModel = require('../models/user/user.model.server');
 
     findAllUsers = (req, res) =>
@@ -12,20 +11,20 @@ module.exports = app => {
         console.log('in login');
         const user = req.body;
         userModel.findUserByCredentials(user.username, user.password)
-            .then(user => {
-                req.session['currentUser'] = user;
-                res.send(req.session['currentUser']);
+            .then(response => {
+                if (response === null) {
+                    res.send(404);
+                } else {
+                    req.session['currentUser'] = response;
+                    res.send(response);
+                    res.send(status);
+                    console.log(response);
+                }
             });
     };
 
     profile = (req, res) => {
-        const profile = req.session['currentUser'];
-        if (profile) {
-            userModel.findUserByIdExpanded(profile._id)
-                .then(user => res.send(user))
-        } else {
-            res.sendStatus(403)
-        }
+        res.send(req.session['currentUser']);
     };
 
     register = (req, res) => {
@@ -35,11 +34,23 @@ module.exports = app => {
         var newUser = {
             username: username, password: password
         };
-        userModel.createUser(newUser).then(() => res.send(newUser));
+        userModel
+            .findUserByUsername(username)
+            .then(function (user) {
+                if (!user) {
+                    return userModel.createUser(newUser)
+                }
+            })
+            .then(function (user) {
+                req.session['currentUser'] = user;
+                res.send(user);
+            });
     };
 
     logout = (req, res) => {
         req.session.destroy();
+        res.send(200);
+        console.log("destroy session in node");
     };
 
     updateUser = (req, res) => {
@@ -60,7 +71,7 @@ module.exports = app => {
     app.post('/api/login', login);
     app.post('/api/register', register);
     app.post('/api/logout', logout);
-    app.get('/api/profile', profile);
+    app.get('/api/profiles', profile);
     app.put('/api/profile', updateUser);
 
     app.delete('/api/profile', deleteUser);
