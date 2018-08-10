@@ -4,10 +4,10 @@ var express = require('express');
 var app = express();
 var session = require('express-session');
 var bodyParser = require('body-parser');
-const MONGO_DB_URL = 'mongodb://cwaj400:rootuser1@ds223609.mlab.com:23609/webdevsummer2assfour';
+// const MONGO_DB_URL = 'mongodb://cwaj400:rootuser1@ds223609.mlab.com:23609/webdevsummer2assfour';
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://cwaj400:rootuser1@ds223609.mlab.com:23609/webdevsummer2assfour');
+mongoose.connect(process.env.MONGO_DB_URL);
 
 
 app.use(function (req, res, next) {
