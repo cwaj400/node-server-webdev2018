@@ -34,6 +34,6 @@ userService(app);
 
 require('./services/section.service.server')(app);
 
-app.listen(process.env.MONGO_DB_URL || 3000, () =>
+app.listen(process.env.PORT || 3000, () =>
     console.log('Node server started!'));
 
