@@ -8,11 +8,26 @@ createQuestion = question =>
 findAllQuestions = () =>
     questionModel.find();
 
+updateQuestion = (questionId, newQuestion) =>
+    questionModel.update({
+            _id: questionId
+        },
+        {
+            $set: newQuestion
+        });
+
 findQuestionById = qId =>
     questionModel.findById(qId);
+
+deleteQuestion = (questionId) =>
+    questionModel.remove({
+        _id: questionId
+    });
 
 module.exports = {
     createQuestion,
     findAllQuestions,
-    findQuestionById
-}
+    findQuestionById,
+    deleteQuestion,
+    updateQuestion
+};

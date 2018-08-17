@@ -1,11 +1,12 @@
 module.exports = app => {
     const sectionModel = require('../models/sections/section.model.server');
+    const enrollmentModel = require('../models/enrollment/enrollment.model.server');
 
     app.put('/api/section/:sectionId/enroll', (req, res) => {
         const currentUser = req.session['currentUser'];
         sectionModel
             .enroll(currentUser._id, req.params['sectionId'])
-            .then(status => res.sendStatus(200))
+            .then(status => res.send(200))
     });
 
 
@@ -47,8 +48,12 @@ module.exports = app => {
         sectionModel.deleteSection(sid);
     };
 
+    findEnrollmentsForStudent = (req, res) => {
+        enrollmentModel.findEnrollmentsForStudent(req.params['sid']).then(response => res.send(response));
+    };
 
     app.put('/api/section/:sectionId', updateSection);
     app.delete('/api/section/:sectionId', deleteSection);
+    app.get('api/student/:sid/enrollments', findEnrollmentsForStudent);
 
 };

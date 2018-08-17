@@ -68,6 +68,11 @@ module.exports = app => {
         userModel.deleteUser(uid);
     };
 
+    getAllUsers = (req, res) => {
+        userModel.findAllUsers().then(users => res.send(users));
+    };
+
+
     app.post('/api/login', login);
     app.post('/api/register', register);
     app.post('/api/logout', logout);
@@ -75,5 +80,7 @@ module.exports = app => {
     app.put('/api/profile', updateUser);
 
     app.delete('/api/profile', deleteUser);
+
+    app.get('/api/user', getAllUsers);
 
 };

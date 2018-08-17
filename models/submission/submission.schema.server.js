@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 module.exports = mongoose.Schema({
-    student: {
+    user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'UserModel'
     },
@@ -9,10 +9,7 @@ module.exports = mongoose.Schema({
         ref: 'QuizModel'
     },
     answers: [{
-        fillBlanksAnswers: {
-            variable: String,
-            value: String
-        },
+        fillBlanksAnswers: String,
         multipleChoiceAnswer: Number,
         trueFalseAnswer: Boolean,
         essayAnswer: String,
@@ -20,5 +17,8 @@ module.exports = mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'QuestionModel'
         }
-    }]
-}, {collection: 'submission'});
+    }],
+    timestamp: Date,
+}, {
+    collection: 'submission'
+});

@@ -15,7 +15,7 @@ unenroll = (uid, sid) =>
         student: uid,
     });
 
-findSectionsForStudent = (sid) => {
+findEnrollmentsForStudent = (sid) => {
     return enrollmentModel
         .find({
             student: sid
@@ -27,5 +27,5 @@ findSectionsForStudent = (sid) => {
 module.exports = {
     enroll,
     unenroll,
-    findSectionsForStudent,
+    findEnrollmentsForStudent
 };
